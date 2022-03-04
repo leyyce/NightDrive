@@ -1,0 +1,65 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://scenes/obstacles/Obstacle.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/cars/toyota_ae86/BackLight.png" type="Texture" id=2]
+[ext_resource path="res://assets/cars/toyota_ae86/Light.png" type="Texture" id=3]
+[ext_resource path="res://assets/props/vehicles/subaru_impreza_wrx/Subaru_Impreza_WRX.png" type="Texture" id=4]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 4 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 22.0
+height = 74.0001
+
+[sub_resource type="OccluderPolygon2D" id=3]
+cull_mode = 1
+polygon = PoolVector2Array( -62, 17, -62, -21, -51, -24, 48, -24, 59, -19, 61, -15, 61, 14, 59, 19, 51, 24, -53, 24 )
+
+[node name="SubaruImprezaWRX" instance=ExtResource( 1 )]
+speed_range = Vector2( 1333, 1743 )
+
+[node name="AnimatedSprite" parent="." index="1"]
+frames = SubResource( 1 )
+
+[node name="CollisionShape2D" parent="." index="2"]
+shape = SubResource( 2 )
+
+[node name="LightOccluder2D" parent="." index="3"]
+occluder = SubResource( 3 )
+
+[node name="BackLight" type="Light2D" parent="." index="4"]
+position = Vector2( -62, 0 )
+rotation = 0.115192
+texture = ExtResource( 2 )
+offset = Vector2( -20, 5 )
+color = Color( 1, 0, 0, 1 )
+energy = 3.35
+range_layer_min = -1
+shadow_enabled = true
+shadow_item_cull_mask = 3
+
+[node name="LightLeft" type="Light2D" parent="." index="5"]
+position = Vector2( 62, 14 )
+scale = Vector2( 2.35938, 1.25 )
+texture = ExtResource( 3 )
+offset = Vector2( 64, 0 )
+energy = 4.5
+range_layer_min = -1
+shadow_enabled = true
+shadow_item_cull_mask = 3
+
+[node name="LightRight" type="Light2D" parent="." index="6"]
+position = Vector2( 61, -14 )
+scale = Vector2( 2.35156, 1.25 )
+texture = ExtResource( 3 )
+offset = Vector2( 64, 0 )
+energy = 4.5
+range_layer_min = -1
+shadow_enabled = true
+shadow_item_cull_mask = 3

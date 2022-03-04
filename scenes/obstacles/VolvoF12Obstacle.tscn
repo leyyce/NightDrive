@@ -1,0 +1,216 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://scenes/obstacles/Obstacle.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/cars/toyota_ae86/Light.png" type="Texture" id=2]
+[ext_resource path="res://assets/props/vehicles/volvo_f12/Volvo_F12.png" type="Texture" id=3]
+[ext_resource path="res://assets/cars/toyota_ae86/BackLight.png" type="Texture" id=4]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 3 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 144, 33.5 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 3.5, 20 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 10, 18 )
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 15, 23.5 )
+
+[sub_resource type="OccluderPolygon2D" id=6]
+polygon = PoolVector2Array( -180, 34, -179, -34, 110, -33, 110, -24, 118, -19, 119, 16, 110, 25, 110, 34 )
+
+[sub_resource type="Animation" id=7]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite/WarnLightRight:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 90.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimatedSprite/WarnLightLeft:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+
+[sub_resource type="Animation" id=8]
+resource_name = "RotateLight"
+length = 2.0
+loop = true
+step = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite/WarnLightRight:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1, 1.5, 2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 90.0, 180.0, 270.0, 360.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimatedSprite/WarnLightLeft:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5, 1, 1.5, 2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 90.0, 180.0, 270.0, 360.0 ]
+}
+
+[node name="VolvoF12Obstacle" groups=["truck"] instance=ExtResource( 1 )]
+speed_range = Vector2( 769, 923 )
+
+[node name="RayCast2D" parent="." index="0"]
+position = Vector2( 154, 0 )
+
+[node name="AnimatedSprite" parent="." index="1"]
+frames = SubResource( 1 )
+
+[node name="SpotLight" type="Light2D" parent="AnimatedSprite" index="0"]
+position = Vector2( 180, 0 )
+scale = Vector2( 2.05469, 2.20313 )
+texture = ExtResource( 2 )
+offset = Vector2( 60, 0 )
+energy = 5.0
+range_layer_min = -1
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="FrontLightLeft" type="Light2D" parent="AnimatedSprite" index="1"]
+position = Vector2( 175, -18 )
+texture = ExtResource( 2 )
+offset = Vector2( 60, 0 )
+energy = 3.5
+range_layer_min = -1
+shadow_enabled = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="FrontLightRight" type="Light2D" parent="AnimatedSprite" index="2"]
+position = Vector2( 175, 18 )
+texture = ExtResource( 2 )
+offset = Vector2( 60, 0 )
+energy = 3.5
+range_layer_min = -1
+shadow_enabled = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="WarnLightRight" type="Light2D" parent="AnimatedSprite" index="3"]
+position = Vector2( 175, -14 )
+rotation = 1.5708
+scale = Vector2( 1.04224, 0.515625 )
+texture = ExtResource( 4 )
+offset = Vector2( -20, 0 )
+color = Color( 1, 0, 0, 1 )
+energy = 3.5
+range_layer_min = -1
+shadow_enabled = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="WarnLightLeft" type="Light2D" parent="AnimatedSprite" index="4"]
+position = Vector2( 175, 16 )
+scale = Vector2( 1.04224, 0.515625 )
+texture = ExtResource( 4 )
+offset = Vector2( -20, 0 )
+color = Color( 1, 0, 0, 1 )
+energy = 3.5
+range_layer_min = -1
+shadow_enabled = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="BackLightRight" type="Light2D" parent="AnimatedSprite" index="5"]
+position = Vector2( -180, 20 )
+scale = Vector2( 1, 0.5 )
+texture = ExtResource( 4 )
+offset = Vector2( -20, 5 )
+color = Color( 1, 0, 0, 1 )
+energy = 3.35
+range_layer_min = -1
+shadow_enabled = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="BackLightLeft" type="Light2D" parent="AnimatedSprite" index="6"]
+position = Vector2( -180, -23 )
+rotation = -0.113446
+scale = Vector2( 0.95, 0.5 )
+texture = ExtResource( 4 )
+offset = Vector2( -20, 5 )
+color = Color( 1, 0, 0, 1 )
+energy = 3.35
+range_layer_min = -1
+shadow_enabled = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" parent="." index="2"]
+position = Vector2( -35, 0.5 )
+rotation = 0.0
+shape = SubResource( 2 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="." index="3"]
+position = Vector2( 112.5, 1 )
+shape = SubResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="." index="4"]
+position = Vector2( 130, 2 )
+shape = SubResource( 4 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="." index="5"]
+position = Vector2( 154, 1.5 )
+shape = SubResource( 5 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="LightOccluder2D" parent="." index="6"]
+occluder = SubResource( 6 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="7"]
+autoplay = "RotateLight"
+anims/RESET = SubResource( 7 )
+anims/RotateLight = SubResource( 8 )

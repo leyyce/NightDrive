@@ -1,0 +1,201 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://scenes/player_cars/ToyotaAE86.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/StreetLight.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/music/electronic-senses-destroyer.mp3" type="AudioStream" id=4]
+[ext_resource path="res://assets/map_day.png" type="Texture" id=5]
+[ext_resource path="res://scripts/Main.gd" type="Script" id=6]
+[ext_resource path="res://shaders/fog.shader" type="Shader" id=7]
+[ext_resource path="res://assets/transparent.png" type="Texture" id=8]
+
+[sub_resource type="ShaderMaterial" id=3]
+shader = ExtResource( 7 )
+shader_param/color = Vector3( 0.15, 0.13, 0.25 )
+shader_param/OCTAVES = 4
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 641.5, 360 )
+
+[node name="Main" type="Node2D"]
+script = ExtResource( 6 )
+
+[node name="UILayer" type="CanvasLayer" parent="."]
+
+[node name="ScoreTextLabel" type="RichTextLabel" parent="UILayer"]
+light_mask = 0
+margin_left = 1202.0
+margin_top = 4.0
+margin_right = 1274.0
+margin_bottom = 19.0
+text = "Score"
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ScoreCountLabel" type="RichTextLabel" parent="UILayer"]
+light_mask = 0
+margin_left = 1202.0
+margin_top = 20.0
+margin_right = 1274.0
+margin_bottom = 35.0
+text = "0"
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="MPTextLabel" type="RichTextLabel" parent="UILayer"]
+light_mask = 0
+margin_left = 1202.0
+margin_top = 35.0
+margin_right = 1226.0
+margin_bottom = 50.0
+text = "MP"
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="MPCountLabel" type="RichTextLabel" parent="UILayer"]
+light_mask = 0
+margin_left = 1228.0
+margin_top = 34.0
+margin_right = 1274.0
+margin_bottom = 49.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="HighScoreTextLabel" type="RichTextLabel" parent="UILayer"]
+light_mask = 0
+margin_left = 1202.0
+margin_top = 56.0
+margin_right = 1274.0
+margin_bottom = 71.0
+text = "HighScore"
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="HighScoreCountLabel" type="RichTextLabel" parent="UILayer"]
+light_mask = 0
+margin_left = 1202.0
+margin_top = 70.0
+margin_right = 1274.0
+margin_bottom = 85.0
+text = "0"
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+layer = -1
+
+[node name="Street" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2( 1280, 0 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/Street"]
+modulate = Color( 0.0745098, 0.0588235, 0.0980392, 1 )
+texture = ExtResource( 5 )
+centered = false
+region_rect = Rect2( 0, 0, 3020, 1400 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Car" parent="." instance=ExtResource( 2 )]
+position = Vector2( 125, 360 )
+
+[node name="ObstacleContainer" type="Node" parent="."]
+
+[node name="PropsContainer" type="Node" parent="."]
+
+[node name="Fog" type="Sprite" parent="."]
+material = SubResource( 3 )
+position = Vector2( 640, 360 )
+scale = Vector2( 1280, 720 )
+z_index = 1
+texture = ExtResource( 8 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Cam" type="Area2D" parent="."]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CamColider" type="CollisionShape2D" parent="Cam"]
+visible = false
+position = Vector2( 640, 360 )
+shape = SubResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Camera2D" type="Camera2D" parent="Cam"]
+anchor_mode = 0
+current = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="BackGroundMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+volume_db = -13.983
+autoplay = true
+
+[node name="ObstacleTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="CounterTrafficTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="CounterTraficSpawnUp" type="Position2D" parent="."]
+position = Vector2( 1950, 37 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CounterTraficSpawnDown" type="Position2D" parent="."]
+position = Vector2( 1950, 120 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ObstacleSpawn" type="Position2D" parent="."]
+position = Vector2( 1950, 292 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ObstacleSpawn2" type="Position2D" parent="."]
+position = Vector2( 1950, 370 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ObstacleSpawn3" type="Position2D" parent="."]
+position = Vector2( 1950, 449 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ObstacleSpawn4" type="Position2D" parent="."]
+position = Vector2( 1950, 533 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="MiddleStreetLight" parent="." instance=ExtResource( 3 )]
+position = Vector2( 0, 208 )
+z_index = 2
+
+[node name="MiddleStreetLight2" parent="." instance=ExtResource( 3 )]
+position = Vector2( 1280, 208 )
+z_index = 2
+
+[connection signal="body_exited" from="Cam" to="." method="_on_Cam_body_exited"]
+[connection signal="timeout" from="ObstacleTimer" to="." method="_on_Timer_timeout"]
+[connection signal="timeout" from="CounterTrafficTimer" to="." method="_on_CounterTrafficTimer_timeout"]

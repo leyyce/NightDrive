@@ -1,0 +1,62 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://assets/props/Streetlantern.png" type="Texture" id=1]
+[ext_resource path="res://assets/props/lanternlight.png" type="Texture" id=2]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 57.52, 62.08 )
+
+[sub_resource type="OccluderPolygon2D" id=3]
+cull_mode = 1
+polygon = PoolVector2Array( -0.8, 0.8, -1.2, 0.4, -1.2, 0, -0.8, -0.4, -0.4, -0.4, -4.76837e-07, 0, -4.76837e-07, 0.4, -0.4, 0.8 )
+
+[node name="StreetLight" type="StaticBody2D" groups=["streetlight"]]
+scale = Vector2( 2.5, 2.5 )
+
+[node name="CamCollision" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2( -0.999995, -0.800002 )
+scale = Vector2( 2.5, 2.5 )
+shape = SubResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+position = Vector2( 0.4, 0 )
+occluder = SubResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Sprite" type="Sprite" parent="."]
+modulate = Color( 0.65098, 0.521569, 0.843137, 1 )
+light_mask = 0
+position = Vector2( 4.76837e-07, 4.76837e-07 )
+texture = ExtResource( 1 )
+offset = Vector2( 2.8, 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="TopLight" type="Light2D" parent="Sprite"]
+position = Vector2( 0, -11 )
+scale = Vector2( 0.5, 0.75 )
+texture = ExtResource( 2 )
+energy = 2.75
+range_layer_min = -1
+shadow_item_cull_mask = 3
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="BotLight" type="Light2D" parent="Sprite"]
+position = Vector2( 0, 11 )
+rotation = 3.14159
+scale = Vector2( 0.5, 0.75 )
+texture = ExtResource( 2 )
+energy = 2.75
+range_layer_min = -1
+__meta__ = {
+"_edit_lock_": true
+}
