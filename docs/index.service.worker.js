@@ -4,10 +4,10 @@
 // Incrementing CACHE_VERSION will kick off the install event and force
 // previously cached resources to be updated from the network.
 const CACHE_VERSION = "1";
-const CACHE_NAME = "NightDrive-cache";
-const OFFLINE_URL = "NightDrive.offline.html";
+const CACHE_NAME = "index-cache";
+const OFFLINE_URL = "index.offline.html";
 // Files that will be cached on load.
-const CACHED_FILES = ["NightDrive.html","NightDrive.js","NightDrive.wasm","NightDrive.pck","NightDrive.offline.html","NightDrive.icon.png","NightDrive.apple-touch-icon.png"];
+const CACHED_FILES = ["index.html","index.js","index.wasm","index.pck","index.offline.html","index.icon.png","index.apple-touch-icon.png"];
 // Files that we might not want the user to preload, and will only be cached on first load.
 const CACHABLE_FILES = [];
 const FULL_CACHE = CACHED_FILES.concat(CACHABLE_FILES);
