@@ -7,7 +7,7 @@
 | Key         | Command               |
 |-------------|-----------------------|
 | Arrow Up    | Accelerate            |
-| Arrow Down  | Deaccelerate          |
+| Arrow Down  | Break                 |
 | Arrow Left  | Steer left            |
 | Arrow Right | Steer right           |
 | F           | Enter/Exit fullscreen |
